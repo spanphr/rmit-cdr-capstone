@@ -1,0 +1,101 @@
+-- Databricks notebook source
+-- MAGIC %python
+-- MAGIC
+-- MAGIC # =====================================================
+-- MAGIC # ICU SILVER — COMBINED QUALITY REVIEW
+-- MAGIC # STEP 10: SCHEMA AND STRUCTURE ASSESSMENT
+-- MAGIC # READ ONLY — NO MODIFICATIONS
+-- MAGIC # =====================================================
+-- MAGIC
+-- MAGIC TABLES = [
+-- MAGIC     "inputevents",
+-- MAGIC     "ingredientevents",
+-- MAGIC     "procedureevents"
+-- MAGIC ]
+-- MAGIC
+-- MAGIC CATALOG = "cdr_mimiciv"
+-- MAGIC
+-- MAGIC important_fields = {
+-- MAGIC     "subject_id", "hadm_id", "stay_id",
+-- MAGIC     "caregiver_id", "itemid",
+-- MAGIC     "starttime", "endtime", "charttime",
+-- MAGIC     "storetime", "orderid", "linkorderid",
+-- MAGIC     "amount", "amountuom", "rate", "rateuom",
+-- MAGIC     "value", "valueuom",
+-- MAGIC     "patientweight", "totalamount",
+-- MAGIC     "statusdescription"
+-- MAGIC }
+-- MAGIC
+-- MAGIC for name in TABLES:
+-- MAGIC
+-- MAGIC     bronze_name = f"{CATALOG}.bronze.{name}"
+-- MAGIC     silver_name = f"{CATALOG}.silver_v2.{name}"
+-- MAGIC
+-- MAGIC     print("\n" + "=" * 55)
+-- MAGIC     print(f"TABLE: {name.upper()}")
+-- MAGIC     print("=" * 55)
+-- MAGIC
+-- MAGIC     if not spark.catalog.tableExists(bronze_name):
+-- MAGIC         print("Bronze source: MISSING")
+-- MAGIC         continue
+-- MAGIC
+-- MAGIC     if not spark.catalog.tableExists(silver_name):
+-- MAGIC         print("Silver target: MISSING")
+-- MAGIC         continue
+-- MAGIC
+-- MAGIC     bronze_schema = {
+-- MAGIC         f.name: f.dataType.simpleString()
+-- MAGIC         for f in spark.table(bronze_name).schema.fields
+-- MAGIC     }
+-- MAGIC
+-- MAGIC     silver_schema = {
+-- MAGIC         f.name: f.dataType.simpleString()
+-- MAGIC         for f in spark.table(silver_name).schema.fields
+-- MAGIC     }
+-- MAGIC
+-- MAGIC     print("Bronze columns:", len(bronze_schema))
+-- MAGIC     print("Silver columns:", len(silver_schema))
+-- MAGIC
+-- MAGIC     print("\n--- IMPORTANT SILVER FIELD TYPES ---")
+-- MAGIC
+-- MAGIC     for field, dtype in silver_schema.items():
+-- MAGIC         if field.lower() in important_fields:
+-- MAGIC             print(f"{field}: {dtype}")
+-- MAGIC
+-- MAGIC     print("\n--- TYPE CHANGES FROM BRONZE ---")
+-- MAGIC
+-- MAGIC     differences = [
+-- MAGIC         (col, bronze_schema[col], silver_schema[col])
+-- MAGIC         for col in bronze_schema.keys() & silver_schema.keys()
+-- MAGIC         if bronze_schema[col] != silver_schema[col]
+-- MAGIC     ]
+-- MAGIC
+-- MAGIC     if differences:
+-- MAGIC         for col, old, new in sorted(differences):
+-- MAGIC             print(f"{col}: {old} -> {new}")
+-- MAGIC     else:
+-- MAGIC         print("No datatype changes detected")
+-- MAGIC
+-- MAGIC     print("\n--- SILVER-ONLY COLUMNS ---")
+-- MAGIC
+-- MAGIC     added = sorted(silver_schema.keys() - bronze_schema.keys())
+-- MAGIC     print(added if added else "None")
+-- MAGIC
+-- MAGIC     print("\n--- BRONZE COLUMNS MISSING IN SILVER ---")
+-- MAGIC
+-- MAGIC     missing = sorted(bronze_schema.keys() - silver_schema.keys())
+-- MAGIC     print(missing if missing else "None")
+-- MAGIC
+-- MAGIC     print("\n--- QUALITY / PROCESSING COLUMNS ---")
+-- MAGIC
+-- MAGIC     quality_columns = [
+-- MAGIC         col for col in silver_schema
+-- MAGIC         if "dq_" in col.lower()
+-- MAGIC         or "quality" in col.lower()
+-- MAGIC         or "processed" in col.lower()
+-- MAGIC     ]
+-- MAGIC
+-- MAGIC     print(quality_columns if quality_columns else "None detected")
+-- MAGIC
+-- MAGIC print("\nSTEP 10 COMPLETE — READ ONLY")
+-- MAGIC
