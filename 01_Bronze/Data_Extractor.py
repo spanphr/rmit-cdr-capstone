@@ -6,8 +6,10 @@
 # MAGIC `AWS S3` → `Unity Catalog external volume` → `configurable Bronze ingestion` → `Delta Bronze tables`
 # MAGIC
 # MAGIC ## Purpose
-# MAGIC One ingestion entry point for all 31 MIMIC-IV tables (22 `hosp`, 9 `icu`). The source is
-# MAGIC chosen by configuration only: `SOURCE_MODE → SOURCES[SOURCE_MODE] → common ingestion logic`.
+# MAGIC One ingestion entry point for the 31 expected MIMIC-IV tables (22 `hosp`, 9 `icu`). Two of them
+# MAGIC (`poe`, `poe_detail`) are intentionally excluded from the trusted production pipeline, so the
+# MAGIC production scope is **29 of 31** (see *Known limitations*). The source is chosen by
+# MAGIC configuration only: `SOURCE_MODE → SOURCES[SOURCE_MODE] → common ingestion logic`.
 # MAGIC
 # MAGIC | `SOURCE_MODE` | Source | Layout | Bronze target |
 # MAGIC |---|---|---|---|
@@ -19,9 +21,10 @@
 # MAGIC supported by configuration but use their own schemas so they can never mix with the full data.
 # MAGIC
 # MAGIC ## Bronze principles
-# MAGIC - Source-aligned: the Bronze schema contains only the 31 MIMIC source tables, with source
+# MAGIC - Source-aligned: the Bronze schema contains only MIMIC source tables, with source
 # MAGIC   columns and values unchanged. Empty CSV fields load as NULL (Spark CSV default).
 # MAGIC - Create only missing tables. Existing tables are skipped.
+# MAGIC - Tables in `EXCLUDED_TABLES` are never created, rebuilt or counted as trusted coverage.
 # MAGIC - Tables are never deleted. Nothing is overwritten unless `REBUILD = True` **and** the table is named in `REBUILD_CONFIRM`.
 # MAGIC - `.csv.gz` is preferred over `.csv`. A duplicate in the same folder is ignored and reported.
 # MAGIC - Parsing is strict (`FAILFAST`): malformed input stops the load instead of silently changing values.
@@ -51,6 +54,23 @@
 # MAGIC   adds `multiLine` and RFC-4180 quote escaping; files without embedded newlines or doubled
 # MAGIC   quotes parse identically.
 # MAGIC - Inference chooses column types from the data, as before. Types therefore follow the file content.
+# MAGIC
+# MAGIC ## Known limitations and data-quality decisions
+# MAGIC **`poe` and `poe_detail` are excluded from the final project pipeline** (`EXCLUDED_TABLES`).
+# MAGIC - **Decision:** the existing Bronze copies `cdr_mimiciv.bronze.poe` and `cdr_mimiciv.bronze.poe_detail`
+# MAGIC   were judged unreliable by the project team and must not be used for Silver, Gold, Genie,
+# MAGIC   dashboards or validation. The underlying cause was not diagnosed in this notebook.
+# MAGIC - **Handling:** this notebook never creates, rebuilds, deletes or overwrites them. The existing
+# MAGIC   tables are left untouched, only labelled as untrusted in the plan and in the run log.
+# MAGIC - **Context observed at the time:** `hosp/` holds both `poe.csv.gz` and a 5.1 GB `poe.csv`, and a
+# MAGIC   different-sized `poe.csv.gz` exists in `cdr_mimiciv.default.raw`. The existing Bronze copies were
+# MAGIC   loaded with the earlier loader and Spark CSV defaults.
+# MAGIC - **Impact:** no Gold table, Genie space, dashboard or saved query depends on either table
+# MAGIC   (status `EXCLUDED_NOT_BLOCKING`). `silver_v2.poe` and `silver_v2.poe_detail` exist but have no downstream consumers.
+# MAGIC - **Reporting:** coverage is reported as expected / excluded / present / missing. The trusted
+# MAGIC   pipeline covers 29 of the 31 expected MIMIC-IV tables, not all 31.
+# MAGIC - **To reinstate:** remove the table from `EXCLUDED_TABLES`, resolve the source and loading
+# MAGIC   questions above, and rebuild it deliberately through `REBUILD` and `REBUILD_CONFIRM`.
 
 # COMMAND ----------
 
@@ -85,6 +105,18 @@ REBUILD = False                     # default: create only missing tables
 REBUILD_CONFIRM = []                # a rebuild also requires the table names to be listed here
 DRY_RUN = True                      # True: print the plan only, write nothing
 VALIDATE_ROW_COUNTS = True          # compare observed source rows with Bronze rows for every table
+
+# Expected MIMIC tables that are intentionally NOT part of the trusted production pipeline.
+# They are never created, rebuilt, deleted or overwritten here; existing Bronze copies are left
+# untouched and reported as untrusted. See "Known limitations" in the documentation above.
+EXCLUSION_REASON = (
+    "existing Bronze copy judged unreliable by the project team (decision 2026-10-19); "
+    "not used for Silver, Gold, Genie, dashboards or validation"
+)
+EXCLUDED_TABLES = {
+    "poe": EXCLUSION_REASON,
+    "poe_detail": EXCLUSION_REASON,
+}
 
 FILE_PREFERENCE = ["csv.gz", "csv"]  # first match wins; later matches in the same folder are ignored
 CSV_OPTIONS = {
@@ -184,12 +216,19 @@ if REBUILD and not REBUILD_CONFIRM:
 bad_confirm = [t for t in REBUILD_CONFIRM if t not in TABLE_REGISTRY]
 if bad_confirm:
     raise ValueError(f"REBUILD_CONFIRM names not in the registry: {bad_confirm}")
+bad_excluded = [t for t in EXCLUDED_TABLES if t not in TABLE_REGISTRY]
+if bad_excluded:
+    raise ValueError(f"EXCLUDED_TABLES names not in the registry: {bad_excluded}")
+excluded_rebuild = [t for t in REBUILD_CONFIRM if t in EXCLUDED_TABLES]
+if excluded_rebuild:
+    raise ValueError(f"Excluded tables cannot be rebuilt: {excluded_rebuild}")
 rebuild_set = set(REBUILD_CONFIRM) if REBUILD else set()
 
 print(f"SOURCE_MODE: {SOURCE_MODE}")
 print(f"Source root: {SOURCE_ROOT}  (layout: {LAYOUT})")
 print(f"Target     : {TARGET}")
 print(f"Tables     : {len(selected)} selected | REBUILD={REBUILD} {sorted(rebuild_set)} | DRY_RUN={DRY_RUN}")
+print(f"Excluded   : {sorted(EXCLUDED_TABLES)} (never created or rebuilt; existing copies untrusted)")
 
 # COMMAND ----------
 
@@ -246,7 +285,9 @@ def build_plan():
                 other_copies.setdefault(loc, []).append(table)
 
         exists = spark.catalog.tableExists(f"{TARGET}.{table}")
-        if source_file is None:
+        if table in EXCLUDED_TABLES:
+            action = "EXCLUDED"                    # wins over every other setting
+        elif source_file is None:
             action = "NO_SOURCE"
         elif exists and table in rebuild_set:
             action = "REBUILD"
@@ -258,6 +299,7 @@ def build_plan():
         plan.append({
             "table": table, "module": module, "target_table": f"{TARGET}.{table}",
             "source_file": source_file, "source_bytes": source_bytes, "action": action,
+            "exists": exists,
         })
 
     for loc, tables in other_copies.items():
@@ -275,17 +317,36 @@ def build_plan():
     return plan, warnings
 
 
+def coverage_report(plan, exists, ingested=()):
+    """Expected / excluded / present / missing, so excluded tables never count as trusted coverage."""
+    excluded = [p["table"] for p in plan if p["action"] == "EXCLUDED"]
+    scope = [p["table"] for p in plan if p["action"] != "EXCLUDED"]
+    present = [t for t in scope if exists[t]]
+    missing = [t for t in scope if not exists[t]]
+    untrusted = [t for t in excluded if exists[t]]
+    print(f"\nCoverage in {TARGET}")
+    print(f"  expected MIMIC source tables : {len(plan)}")
+    print(f"  intentionally excluded       : {len(excluded)} {excluded}")
+    if untrusted:
+        print(f"    existing Bronze copies left untouched and NOT trusted: {untrusted}")
+    print(f"  trusted pipeline scope       : {len(scope)} of {len(plan)}")
+    print(f"  present in scope             : {len(present)}  (ingested in this run: {len(list(ingested))})")
+    print(f"  missing in scope             : {len(missing)} {missing}")
+
+
 def print_plan(plan, warnings):
     print(f"{'table':<20}{'module':<7}{'action':<13}{'size':>12}  source file")
     for p in sorted(plan, key=lambda x: (x["action"], x["source_bytes"] or 0)):
         size = mb(p["source_bytes"]) if p["source_bytes"] is not None else "-"
-        print(f"{p['table']:<20}{p['module']:<7}{p['action']:<13}{size:>12}  {p['source_file'] or '-'}")
+        note = "  [existing Bronze copy NOT trusted]" if p["action"] == "EXCLUDED" and p["exists"] else ""
+        print(f"{p['table']:<20}{p['module']:<7}{p['action']:<13}{size:>12}  {p['source_file'] or '-'}{note}")
     counts = {}
     for p in plan:
         counts[p["action"]] = counts.get(p["action"], 0) + 1
     print("\nSummary:", counts)
     create = [p["table"] for p in plan if p["action"] == "CREATE"]
     print(f"Would create ({len(create)}): {create}")
+    coverage_report(plan, {p["table"]: p["exists"] for p in plan})
     if warnings:
         print("\nWarnings:")
         for w in warnings:
@@ -415,16 +476,16 @@ else:
         elif p["action"] == "SKIP_EXISTS":
             write_log(run, p, "SKIPPED", now(), message="table already exists; not modified")
             results[p["table"]] = "SKIPPED"
+        elif p["action"] == "EXCLUDED":
+            write_log(run, p, "EXCLUDED", now(), message=EXCLUDED_TABLES[p["table"]])
+            results[p["table"]] = "EXCLUDED"
         else:  # NO_SOURCE
             write_log(run, p, "FAILED", now(), message="no source file found for this table")
             results[p["table"]] = "FAILED"
 
-    # final coverage check against the registry
-    present = [t for t in TABLE_REGISTRY if spark.catalog.tableExists(f"{TARGET}.{t}")]
-    missing = [t for t in TABLE_REGISTRY if t not in present]
-    print(f"\nRegistry coverage in {TARGET}: {len(present)}/{len(TABLE_REGISTRY)}")
-    if missing:
-        print("Missing:", missing)
+    # final coverage check against the registry: expected / excluded / present / missing
+    exists_now = {p["table"]: spark.catalog.tableExists(p["target_table"]) for p in plan}
+    coverage_report(plan, exists_now, ingested=[t for t, s in results.items() if s == "SUCCESS"])
 
     failed = {t: s for t, s in results.items() if s in ("FAILED", "VALIDATION_FAILED")}
     if failed:
