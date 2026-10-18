@@ -1,0 +1,440 @@
+bplist00—XUTI-Data—Zpublic.rtf_BY{\rtf1\ansi\ansicpg1252\cocoartf2907
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fnil\fcharset0 .SFNS-Regular_wdth_opsz110000_GRAD_wght2580000;}
+{\colortbl;\red255\green255\blue255;\red240\green239\blue237;\red29\green28\blue26;\red246\green245\blue244;
+\red255\green255\blue255;\red115\green76\blue169;\red73\green26\blue126;\red11\green97\blue202;\red188\green59\blue15;
+\red86\green102\blue107;\red9\green73\blue93;\red62\green80\blue232;}
+{\*\expandedcolortbl;;\cssrgb\c95294\c94902\c94510;\cssrgb\c14902\c14510\c13725;\cssrgb\c97255\c96863\c96471;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c52941\c39216\c72157;\cssrgb\c36078\c18039\c56863;\cssrgb\c0\c47059\c83137;\cssrgb\c79216\c31373\c6275;
+\cssrgb\c41176\c47451\c49412;\cssrgb\c0\c35686\c43922;\cssrgb\c30980\c41961\c92941;}
+\deftab720
+\pard\pardeftab720\qc\partightenfactor0
+
+\f0\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 \uc0\u59718 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \cb3 AI-generated content may be incorrect\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 \strokec4 \uc0\u59336 \cb1 \
+\cb3 \uc0\u59967 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 James Thom
+\f0\b0  started transcription\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+
+\fs28 \cf5 \cb6 \strokec5 JL\
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \cb1 \strokec2 \pard\pardeftab720\qc\partightenfactor0
+\cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 James Lewis
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 0 minutes 3 seconds\cb1 \
+\cb3 0:03\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 James Lewis 0 minutes 3 seconds\cb1 \
+\cb3 Just a kind of an overview of just Cevo, who we are as a business, not that it's necessarily that relevant for kind of us as a customer to you guys in the sort of project that we're working on. I know Janita has shared with you some of the high-level kind of overview around some of the...\cb1 \
+\
+\cb3 James Lewis 0 minutes 24 seconds\cb1 \
+\cb3 the health data records and looking at that through the lens of, you know, how can the Databricks platform get some insights and sort of, you know, pulling all of that data together and so forth. Just sort of in parallel, and I'll get into it in a minute, but we work obviously closely with AWS as a primary.\cb1 \
+\
+\cb3 James Lewis 0 minutes 44 seconds\cb1 \
+\cb3 sort of partner and we do a lot of work in that platform. Databricks is our other main partner that we do a lot of work with as well. So some of the work that we've been doing with the AWS Healthcare team is very kind of relevant to the use cases that Janita had put forward. So just wanted to, and I'm not sure that we've got it completely ready, but\cb1 \
+\
+\cb3 James Lewis 1 minute 6 seconds\cb1 \
+\cb3 bring some of those two things together so that when you guys are producing the work as part of this project, it's something that we can all use, that Janita and ourselves can use when we're going to talk to real healthcare providers and hospitals and, you know, research departments at universities and so on and so forth. So really we want you guys to produce something that will\cb1 \
+\
+\cb3 James Lewis 1 minute 29 seconds\cb1 \
+\cb3 help ultimately help us to go and accelerate our conversations that we have in the real world around these types of things as well. On that note, just a bit about me. So I don't have a slide on me particularly. So I'm James Lewis. So I'm one of the business leaders and principals that\cb1 \
+\
+\cb3 James Lewis 1 minute 49 seconds\cb1 \
+\cb3 Civo. So we're a born in the cloud AWS and Databricks partner. So we're a consulting partner. So we help organisations to transform and modernise their applications and systems and so forth on the AWS and the Databricks platform.\cb1 \
+\
+\cb3 James Lewis 2 minutes 8 seconds\cb1 \
+\cb3 So again, what we're trying to do is we don't want to just come in and be transactional and go and deliver a piece of work and step out. Our name, Civo, is Continuous Evolution. So we really want to help customers, you know, throughout their life cycle of, you know, their modernization journeys to the cloud. So\cb1 \
+\
+\cb3 James Lewis 2 minutes 28 seconds\cb1 \
+\cb3 We want them to continue to build and evolve and transform, irrespective of whether they're right at the beginning and they haven't done anything in the cloud or on Databricks before, or whether they're a really mature customer and they're looking at the next phase of innovation and evolution. But I'll just pause there. Midhun, I can see you've got your hand up.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb7 \strokec5 MC\
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \cb1 \strokec2 \pard\pardeftab720\qc\partightenfactor0
+\cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 Midhun Chandran
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 2 minutes 51 seconds\cb1 \
+\cb3 2:51\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 Midhun Chandran 2 minutes 51 seconds\cb1 \
+\cb3 Hey, can I record this section, because it will be good to, like, if you're explaining the problem stream and everything, we can go through it again, right?\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb6 \strokec5 JL\
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \cb1 \strokec2 \pard\pardeftab720\qc\partightenfactor0
+\cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 James Lewis
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 2 minutes 53 seconds\cb1 \
+\cb3 2:53\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 James Lewis 2 minutes 53 seconds\cb1 \
+\cb3 Yeah.\cb1 \
+\
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb6 \strokec5 JH\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 Jialun Darren Huang
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 26 minutes 40 seconds\cb1 \
+\cb3 26:40\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 Jialun Darren Huang 26 minutes 40 seconds\cb1 \
+\cb3 Humm.\cb1 \
+\
+\cb3 Jialun Darren Huang 26 minutes 42 seconds\cb1 \
+\cb3 Sounds good, thank you.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb7 \strokec5 MC\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 Midhun Chandran
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 26 minutes 44 seconds\cb1 \
+\cb3 26:44\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 Midhun Chandran 26 minutes 44 seconds\cb1 \
+\cb3 Yeah.\cb1 \
+\
+\cb3 Midhun Chandran 26 minutes 45 seconds\cb1 \
+\cb3 Thanks.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb6 \strokec5 JL\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 James Lewis
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 26 minutes 48 seconds\cb1 \
+\cb3 26:48\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 James Lewis 26 minutes 48 seconds\cb1 \
+\cb3 Maybe you can make it a stretch goal if you kind of, you know, work on the static data set, and then if you, you know, if you've got time or if you've got a good process or something, you can perhaps bring in some, you know, additional data structures or, you know, data sets.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb8 \strokec5 JT\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 James Thom
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 26 minutes 51 seconds\cb1 \
+\cb3 26:51\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 James Thom 26 minutes 51 seconds\cb1 \
+\cb3 Yeah.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb6 \strokec5 JH\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 Jialun Darren Huang
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 27 minutes 5 seconds\cb1 \
+\cb3 27:05\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 Jialun Darren Huang 27 minutes 5 seconds\cb1 \
+\cb3 Sounds good, we will see what we can do.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb6 \strokec5 JL\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 James Lewis
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 27 minutes 13 seconds\cb1 \
+\cb3 27:13\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 James Lewis 27 minutes 13 seconds\cb1 \
+\cb3 Anything else?\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb8 \strokec5 JT\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 James Thom
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 27 minutes 19 seconds\cb1 \
+\cb3 27:19\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 James Thom 27 minutes 19 seconds\cb1 \
+\cb3 So, I think we've we've I've sent out the invitation for next week, I think.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb9 \strokec5 JG\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 Jenitta Gnana
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 27 minutes 21 seconds\cb1 \
+\cb3 27:21\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 Jenitta Gnana 27 minutes 21 seconds\cb1 \
+\cb3 Yeah.\cb1 \
+\
+\cb3 Jenitta Gnana 27 minutes 24 seconds\cb1 \
+\cb3 Yeah, thank you. I've seen it. Thank you.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb8 \strokec5 JT\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 James Thom
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 27 minutes 28 seconds\cb1 \
+\cb3 27:28\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 James Thom 27 minutes 28 seconds\cb1 \
+\cb3 Yep, and I'm not sure whether how much James will be involved next week.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb7 \strokec5 MC\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 Midhun Chandran
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 27 minutes 29 seconds\cb1 \
+\cb3 27:29\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 Midhun Chandran 27 minutes 29 seconds\cb1 \
+\cb3 Yep.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb8 \strokec5 JT\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 James Thom
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 27 minutes 36 seconds\cb1 \
+\cb3 27:36\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 James Thom 27 minutes 36 seconds\cb1 \
+\cb3 Humm.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb9 \strokec5 JG\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 Jenitta Gnana
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 27 minutes 37 seconds\cb1 \
+\cb3 27:37\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 Jenitta Gnana 27 minutes 37 seconds\cb1 \
+\cb3 Unless James, you want to send through some of the technical team to join the second? Yeah, yeah.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb6 \strokec5 JL\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 James Lewis
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 27 minutes 40 seconds\cb1 \
+\cb3 27:40\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 James Lewis 27 minutes 40 seconds\cb1 \
+\cb3 Yeah, I might see if one or two of the guys can join and perhaps I can just join at the beginning, but yeah, I'll work with Janita on that as well. But I'll just tick-tack in the background, Jamie, with yourself and Janita, and we'll just finalise any questions that come out of the.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb8 \strokec5 JT\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 James Thom
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 27 minutes 47 seconds\cb1 \
+\cb3 27:47\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 James Thom 27 minutes 47 seconds\cb1 \
+\cb3 Yeah.\cb1 \
+\
+\cb3 James Thom 27 minutes 54 seconds\cb1 \
+\cb3 Yep.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb9 \strokec5 JG\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 Jenitta Gnana
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 27 minutes 55 seconds\cb1 \
+\cb3 27:55\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 Jenitta Gnana 27 minutes 55 seconds\cb1 \
+\cb3 Yeah.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb6 \strokec5 JL\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 James Lewis
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 27 minutes 58 seconds\cb1 \
+\cb3 27:58\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 James Lewis 27 minutes 58 seconds\cb1 \
+\cb3 The conversation today.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb8 \strokec5 JT\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 James Thom
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 28 minutes 1 second\cb1 \
+\cb3 28:01\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 James Thom 28 minutes 1 second\cb1 \
+\cb3 Okay, well I think we'll leave it there for the whole group and till next week, but for the group too, we'll start our meeting in a moment.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb6 \strokec5 JL\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 James Lewis
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 28 minutes 16 seconds\cb1 \
+\cb3 28:16\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 James Lewis 28 minutes 16 seconds\cb1 \
+\cb3 Lovely to meet everyone. Look forward to working with you guys.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb10 \strokec5 JG\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 Jenitta Gnana
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 28 minutes 16 seconds\cb1 \
+\cb3 28:16\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 Jenitta Gnana 28 minutes 16 seconds\cb1 \
+\cb3 Great. Thanks, everyone. Thanks, Jimmy. Thanks. Thanks. Thanks, Steve. Yep. Thank you.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb11 \strokec5 ID\
+\pard\pardeftab720\qc\partightenfactor0
+\cf2 \cb1 \strokec2 \pard\pardeftab720\qc\partightenfactor0
+\cf2 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 Ishika Vishwanath Dhongde
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 28 minutes 20 seconds\cb1 \
+\cb3 28:20\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 Ishika Vishwanath Dhongde 28 minutes 20 seconds\cb1 \
+\cb3 Thank you. Thank you. Bye.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb6 \strokec5 JH\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 Jialun Darren Huang
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 28 minutes 20 seconds\cb1 \
+\cb3 28:20\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 Jialun Darren Huang 28 minutes 20 seconds\cb1 \
+\cb3 Yeah, thank you. See you. Bye.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb10 \strokec5 DC\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 Divya Chahal
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 28 minutes 21 seconds\cb1 \
+\cb3 28:21\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 Divya Chahal 28 minutes 21 seconds\cb1 \
+\cb3 Bye-bye. Thank you. Thank you.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb12 \strokec5 SR\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 Sean Richards
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 28 minutes 24 seconds\cb1 \
+\cb3 28:24\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 Sean Richards 28 minutes 24 seconds\cb1 \
+\cb3 Bye.\cb1 \
+\pard\pardeftab720\qc\partightenfactor0
+\cf5 \cb6 \strokec5 JH\
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 Jialun Darren Huang
+\f0\b0 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 28 minutes 35 seconds\cb1 \
+\cb3 28:35\cb1 \
+\pard\pardeftab720\partightenfactor0
+
+\fs28 \cf2 \cb3 \strokec2 Jialun Darren Huang 28 minutes 35 seconds\cb1 \
+\cb3 Hello, help.\cb1 \
+\
+\cb3 Jialun Darren Huang 28 minutes 39 seconds\cb1 \
+\cb3 Yeah.\cb1 \
+\
+\cb3 Jialun Darren Huang 28 minutes 43 seconds\cb1 \
+\cb3 Hello!\cb1 \
+\
+\cb3 Jialun Darren Huang 28 minutes 46 seconds\cb1 \
+\cb3 Oh, my God.\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3 \strokec4 \uc0\u59336 \cb1 \
+\cb3 \uc0\u59967 \cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf2 \strokec2 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\b\fs24 \cf4 \cb3 \strokec4 James Thom
+\f0\b0  stopped transcription}     "                           B
