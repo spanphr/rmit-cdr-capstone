@@ -1,0 +1,34 @@
+{
+  "name": "cdr_mimiciv_governance_tags",
+  "description": "Applies the Unity Catalog tag taxonomy (layer / type / domain / mimic_module / hipaa_identifiability / hl7_confidentiality) to cdr_mimiciv and verifies it. Run with mode=dry_run first, then mode=apply. Not created automatically; import via Workflows > Create job > JSON, or `databricks jobs create --json @governance_job.json`.",
+  "max_concurrent_runs": 1,
+  "timeout_seconds": 1800,
+  "parameters": [
+    { "name": "mode", "default": "dry_run" },
+    { "name": "catalog", "default": "cdr_mimiciv" }
+  ],
+  "tasks": [
+    {
+      "task_key": "01_apply_tags",
+      "description": "Schema, table and column tags on bronze, silver, gold",
+      "notebook_task": {
+        "notebook_path": "/Shared/RMIT_CDR_Capstone/04_Governance/jobs/01_apply_tags",
+        "base_parameters": { "mode": "{{job.parameters.mode}}", "catalog": "{{job.parameters.catalog}}", "layers": "bronze,silver,gold" }
+      }
+    },
+    {
+      "task_key": "02_verify_tags",
+      "depends_on": [ { "task_key": "01_apply_tags" } ],
+      "notebook_task": {
+        "notebook_path": "/Shared/RMIT_CDR_Capstone/04_Governance/jobs/02_verify_tags",
+        "base_parameters": { "catalog": "{{job.parameters.catalog}}", "fail_on_gap": "true" }
+      }
+    }
+  ],
+  "_notes": [
+    "Serverless compute by default (no job_clusters block).",
+    "run_as needs APPLY TAG on the catalog (cdr_admins or cdr_data_stewards).",
+    "With mode=dry_run the verify task still runs real checks and reports gaps; set fail_on_gap=false for a dry-run job.",
+    "No schedule. Run after Gold_Build_All so new Gold tables (POE) get tagged."
+  ]
+}
